@@ -5,5 +5,12 @@
 	"private": true,
 	"dependencies": {
 		"express": "4.8.5"
+	},
+	"subdomain": "bitgrid",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"engines": {
+		"node": "0.10.x"
 	}
 }
