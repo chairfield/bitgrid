@@ -1,16 +1,14 @@
 {
-	"name": "bitgrid-server",
-	"description": "node.js test app",
-	"private": true,
-	"dependencies": {
-		"express": "4.8.5"
-	},
-	"subdomain": "bitgrid",
-	"engines": {
-		"node": "0.10.31"
-	},
-	"scripts": {
-		"start": "node server.js"
-	},
-	"version": "0.0.1-3"
+  "name": "bitgrid",
+  "subdomain": "bitgrid",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "version": "0.0.0-2",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "dependencies": {
+    "express": "4.x"
+  }
 }
