@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('127.0.0.1:27017/test');
+var db = monk('mongodb://@localhost:27017/test');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
