@@ -19,8 +19,11 @@ app.set('view engine', 'jade');
 
 app.use(favicon());
 app.use(logger('dev'));
+
+// this will let us get the data from a POST
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
