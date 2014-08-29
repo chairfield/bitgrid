@@ -18,29 +18,31 @@ router.route('/features')
     .post(function(req, res, next) {
 
         // This is more to be helpful to users of a REST client like Postman who forget to set Content-Type.
-        if (req.headers["content-type"].toLowerCase() != "application/json") {
-            res.send("Invalid Content-Type: must be application/json");
+        if (req.headers["content-type"].toLowerCase() != "application/x-www-form-urlencoded") {
+            console.log(req.headers["content-type"]);
+            res.send("Invalid Content-Type: must be application/x-www-form-urlencoded");
             return;
         }
 
         var name = req.body.name;
+        var lat = Number(req.body.lat);
+        var lon = Number(req.body.lon);
+
         if (!name.isEmpty || name.isEmpty()) {
             res.send("Invalid name: must be a non-blank string.");
-            return;
         }
-
-        if (!isLat(req.body.lat) || !isLon(req.body.lon)) {
+        else if (!isLat(lat) || !isLon(lon)) {
             res.send("Invalid lat/lon: latitude must be within -90 and 90 while longitude must be within -180 and 180.");
-            return;
         }
-
-        console.log("inserting feature", req.body.name, req.body.lat, req.body.lon);
-        var pole = { name : req.body.name, lat: req.body.lat, lon: req.body.lon };
-        req.features.insert(pole, function (err, doc) {
-            if (err) next(new Error(err));
-            console.log('feature committed successfully.');
-            res.json(doc);
-        });
+        else {
+            console.log("inserting feature", name, lat, lon);
+            var pole = { name: name, lat: lat, lon: lon };
+            req.features.insert(pole, function (err, doc) {
+                if (err) next(new Error(err));
+                console.log('feature committed successfully.');
+                res.json(doc);
+            });
+        }
     });
 
 String.prototype.isEmpty = function() {

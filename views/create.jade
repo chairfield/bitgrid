@@ -6,15 +6,15 @@ html
   body
     h1 Create New Features
     div
-      form(method='post', action='/api/features')
+      form(method='post', action='/api/features', enctype="application/x-www-form-urlencoded")
         div
           span Name:
-          input(type='text', autofocus='autofocus', id='name')
+          input(type='text', name='name', autofocus='autofocus', id='name')
         div
           span Latitude:
-          input(type='number', id='lat')
+          input(type='number', name='lat', id='lat')
         div
           span Longitude:
-          input(type='number', id='lon')
+          input(type='number', name='lon', id='lon')
         div
           input(type='submit', value='Submit')
