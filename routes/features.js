@@ -5,7 +5,8 @@ router.route('/features')
     .all(function(req, res, next) {
         // This is fantastic; monk seems to cache the connection as every time this runs after the first
         // is an order of magnitude less than the first time (~200 ms to ~20 ms).
-        req.features = require('monk')('mongodb://@localhost:27017/test').get('features');
+        //req.features = require('monk')('mongodb://@localhost:27017/test').get('features');
+        req.features = require('monk')('mongodb://bitgrid:eWI2ASJGwLcn@ds059509.mongolab.com:59509/bitgrid-database').get('features');
         console.log(req.body);
         next();
     })
