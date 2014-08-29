@@ -1,22 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-String.prototype.isEmpty = function() {
-    return (this.length === 0 || !this.trim());
-};
-
-function isLat(lat) {
-    if (isNaN(lat)) return false;
-    var asNumber = Number(lat);
-    return asNumber < 90 && asNumber > -90;
-}
-
-function isLon(lon) {
-    if (isNaN(lon)) return false;
-    var asNumber = Number(lon);
-    return asNumber < 180 && asNumber > -180;
-}
-
 router.route('/features')
     .all(function(req, res, next) {
         // This is fantastic; monk seems to cache the connection as every time this runs after the first
@@ -58,5 +42,21 @@ router.route('/features')
             res.json(doc);
         });
     });
+
+String.prototype.isEmpty = function() {
+    return (this.length === 0 || !this.trim());
+};
+
+function isLat(lat) {
+    if (isNaN(lat)) return false;
+    var asNumber = Number(lat);
+    return asNumber < 90 && asNumber > -90;
+}
+
+function isLon(lon) {
+    if (isNaN(lon)) return false;
+    var asNumber = Number(lon);
+    return asNumber < 180 && asNumber > -180;
+}
 
 module.exports = router;
