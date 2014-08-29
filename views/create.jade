@@ -9,12 +9,12 @@ html
       form(method='post', action='/api/features')
         div
           span Name:
-          input#name
+          input(type='text', autofocus='autofocus', id='name')
         div
           span Latitude:
-          input#lat
+          input(type='text', id='lat')
         div
           span Longitude:
-          input#lon
+          input(type='text', id='lon')
         div
           input(type='submit', value='Submit')
