@@ -1,4 +1,5 @@
 var L = require('leaflet');
+var request = require('request');
 
 L.Icon.Default.imagePath = 'http://leafletjs.com/dist/images';
 
@@ -10,5 +11,21 @@ window.onload = function() {
     var map = L.map(div).setView(DC_COORDS, 13);
 
     L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-    var gj = L.geoJson().addTo(map);
+
+    // Initialize the layer with no features; the request below will be used to populate it.
+    var layer = L.geoJson(null, {
+        onEachFeature: onEachFeature
+    }).addTo(map);
+
+    request('http://bitgrid.jit.su:3000/api/features', function(error, res, body) {
+        if (!error && res.statusCode == 200) {
+            layer.addData(JSON.parse(body));
+        }
+    });
 };
+
+function onEachFeature(feature, layer) {
+    if (feature.properties && feature.properties.name) {
+        layer.bindPopup(feature.properties.name);
+    }
+}
