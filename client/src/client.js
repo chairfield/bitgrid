@@ -17,7 +17,7 @@ window.onload = function() {
         onEachFeature: onEachFeature
     }).addTo(map);
 
-    request('http://bitgrid.jit.su:3000/api/features', function(error, res, body) {
+    request('http://bitgrid.jit.su/api/features', function(error, res, body) {
         if (!error && res.statusCode == 200) {
             layer.addData(JSON.parse(body));
         }
