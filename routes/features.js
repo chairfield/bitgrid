@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var geojson = require('geojson');
 
 router.route('/features')
     .all(function(req, res, next) {
@@ -13,7 +14,9 @@ router.route('/features')
     .get(function(req, res, next) {
         // Find all documents in the features collection.
         req.features.find({},{}, function(e, docs) {
-            res.json(docs);
+            geojson.parse(docs, {Point: ['lat', 'lon']}, function(parsed) {
+                res.send(parsed);
+            });
         });
     })
     .post(function(req, res, next) {
