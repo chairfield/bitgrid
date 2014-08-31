@@ -18,7 +18,7 @@ window.onload = function() {
 
     // The request package added 3/4 MB to my client.js, so it's back to using this ugly thing.
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://localhost:3000/api/features', true);
+    xhr.open('GET', '/api/features', true);
     xhr.onload = function(e) {
         if (xhr.readyState == 4) { // 4 indicates complete
             if (xhr.status == 200 && xhr.responseText) {
