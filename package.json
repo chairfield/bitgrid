@@ -23,5 +23,9 @@
     "leaflet": "0.7.3",
     "browserify": "5.11.0",
     "geojson": "0.1.5"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^3.0.0"
   }
 }
