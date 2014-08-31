@@ -38,10 +38,10 @@ router.route('/features')
         else if (!isLat(lat) || !isLon(lon)) {
             res.send("Invalid lat/lon: latitude must be within -90 and 90 while longitude must be within -180 and 180.");
         }
-        else {
+        else { // Valid data, so we can attempt an insert into mongo.
             console.log("inserting feature", name, lat, lon);
-            var pole = { name: name, lat: lat, lon: lon };
-            req.features.insert(pole, function (err, doc) {
+            var toInsert = { name: name, lat: lat, lon: lon };
+            req.features.insert(toInsert, function (err, doc) {
                 if (err) next(new Error(err));
                 console.log('feature committed successfully.');
                 res.json(doc);
