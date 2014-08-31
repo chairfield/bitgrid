@@ -11,6 +11,9 @@ window.onload = function() {
 
     L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
+    var popup = L.popup();
+    map.on('click', onMapClick);
+
     // Initialize the layer with no features; the request below will be used to populate it.
     var layer = L.geoJson(null, {
         onEachFeature: onEachFeature
@@ -32,7 +35,25 @@ window.onload = function() {
         console.error(xhr.statusText);
     };
     xhr.send(null);
+
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent(createForm(e))
+            .openOn(map);
+    }
 };
+
+function createForm(e) {
+    console.log(e.latlng);
+    var html =
+        '<div><form method=\"post\" action=\"/api/features\" enctype=\"x-www-form-urlencoded\" onsubmit=\"onSave();return false;\"><div><span>Name:</span><input type=\"text\" name=\"name\" autofocus=\"autofocus\"></div><div><span>Latitude:</span><input type=\"text\" name=\"lat\" value=\"' +
+        e.latlng.lat +
+        '\"></div><div><span>Longitude:</span><input type=\"text\" name=\"lon\" value=\"' +
+        e.latlng.lng +
+        '\"></div><div><input type=\"submit\" value=\"Submit\"></div></form></div>';
+    return html;
+}
 
 function onEachFeature(feature, layer) {
     if (feature.properties && feature.properties.name) {
