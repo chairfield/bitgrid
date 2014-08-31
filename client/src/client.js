@@ -1,5 +1,4 @@
 var L = require('leaflet');
-var request = require('request');
 
 L.Icon.Default.imagePath = 'http://leafletjs.com/dist/images';
 
@@ -17,11 +16,22 @@ window.onload = function() {
         onEachFeature: onEachFeature
     }).addTo(map);
 
-    request('http://bitgrid.jit.su/api/features', function(error, res, body) {
-        if (!error && res.statusCode == 200) {
-            layer.addData(JSON.parse(body));
+    // The request package added 3/4 MB to my client.js, so it's back to using this ugly thing.
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://localhost:3000/api/features', true);
+    xhr.onload = function(e) {
+        if (xhr.readyState == 4) { // 4 indicates complete
+            if (xhr.status == 200 && xhr.responseText) {
+                layer.addData(JSON.parse(xhr.responseText));
+            } else {
+                console.error(xhr.statusText);
+            }
         }
-    });
+    };
+    xhr.onerror = function(e) {
+        console.error(xhr.statusText);
+    };
+    xhr.send(null);
 };
 
 function onEachFeature(feature, layer) {
