@@ -45,9 +45,8 @@ window.onload = function() {
 };
 
 function createForm(e) {
-    console.log(e.latlng);
     var html =
-        '<div><form method=\"post\" action=\"/api/features\" enctype=\"x-www-form-urlencoded\" onsubmit=\"onSave();return false;\"><div><span>Name:</span><input type=\"text\" name=\"name\" autofocus=\"autofocus\"></div><div><span>Latitude:</span><input type=\"text\" name=\"lat\" value=\"' +
+        '<div><form method=\"post\" action=\"/api/features\" enctype=\"x-www-form-urlencoded\"><div><span>Name:</span><input type=\"text\" name=\"name\" autofocus=\"autofocus\"></div><div><span>Latitude:</span><input type=\"text\" name=\"lat\" value=\"' +
         e.latlng.lat +
         '\"></div><div><span>Longitude:</span><input type=\"text\" name=\"lon\" value=\"' +
         e.latlng.lng +
